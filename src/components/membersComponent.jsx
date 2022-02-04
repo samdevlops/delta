@@ -15,20 +15,29 @@ class Members extends Component {
     } 
 
     handleChange = () =>{
-        console.log("Button clicked");
         const members = this.state.members;
-        console.log(members);
-        this.setState({members:members,
-            modalstyle:{display:"block"}
-        });
+        const currentstyle = this.state.modalstyle.display;
+        if(currentstyle==="none"){
+            this.setState({members:members,
+                modalstyle:{display:"block"}
+            });
+        }
+
+        if(currentstyle==="block"){
+            this.setState({members:members,
+                modalstyle:{display:"none"}
+            });
+        }
+        
     }
 
-    handleClose = () =>{
-        console.log("Button clicked");
-        const members = this.state.members;
-        console.log(members);
-        this.setState({members:members,
-            modalstyle:{display:"none"}
+    handleDelete = (val) =>{
+        // console.log("name of the player:"+val.name);
+        const updatedmembers = this.state.members.filter( m => m !== val);
+        const style=this.state.modalstyle;
+        this.setState({
+            members:updatedmembers,
+            modalstyle:style
         });
     }
 
@@ -41,28 +50,73 @@ class Members extends Component {
             </div>
             <div id="myModal" class="modal" style={this.state.modalstyle}>
                 <div class="modal-content">
-                    <span class="close" onClick={this.handleClose}>&times;</span>
-                    <p>Some text in the Modal..</p>
+                    <span class="close" onClick={this.handleChange}>&times;</span>
+                    <h3 class="pullstart">Add Members</h3>
+                    <form className="modalform">
+                        <div class="pullstart">
+                            <label>
+                                Name
+                            </label>
+                        </div>
+                        <div className="formgrp">
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </div>
+                        <div class="pullstart">
+                            <label>
+                                Company
+                            </label>
+                        </div>
+                        <div className="formgrp">
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </div>
+                        <div class="pullstart">
+                            <label>
+                                Status
+                            </label>
+                        </div>
+                        <div className="formgrp">
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </div>
+                        <div class="pullstart">
+                            <label>
+                                Notes
+                            </label>
+                        </div>
+                        <div className="formgrp">
+                            <input type="text" value={this.state.value} onChange={this.handleModalForm} />
+                        </div>
+                        <div class="formgrp">
+                            <button id="btncancel" type='reset'>Cancel</button>
+                            <button id='btnsave' type='submit'>Save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <hr id="myrules"/>
+            <div id="dropdowns">
+            
+            </div>
             <div class="table">
                 <table>
                     <tr>
+                        <th></th>
                         <th>Name</th>
                         <th>Company</th>
                         <th>Status</th>
                         <th>Last Updated</th>
                         <th>Notes</th>
+                        <th></th>
                     </tr>
                         {this.state.members.map((val, key) => {
                         return (
                             <tr key={key}>
-                            <td>{val.name}</td>
-                            <td>{val.company}</td>
-                            <td>{val.status}</td>
-                            <td>{val.updated}</td>
-                            <td>{val.notes}</td>
+                                <td>Checkbox</td>
+                                <td>{val.name}</td>
+                                <td>{val.company}</td>
+                                <td>{val.status}</td>
+                                <td>{val.updated}</td>
+                                <td>{val.notes}</td>
+                                <td><button onClick={() => this.handleDelete(val)}>Delete</button></td>
                             </tr>
                         )
                         })}
