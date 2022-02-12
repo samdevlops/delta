@@ -3,7 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import LoginForm from './components/loginComponent';
 import Navbar from './components/navbarComponent';
 import SignUp from './components/signupComponent';
-import Members from './components/membersComponent';
+//import Members from './components/membersComponent';
+import Main from './components/mainComponent';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Switch>
           <Route path="/login" component={LoginForm} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/members" component={Members} />
+          <Route path="/main" component={Main} />
           <Route path="/" component={LoginForm} />
         </Switch>
       </div>

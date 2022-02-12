@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class SignUp extends Component {
     render() { 
         return (
-            <div class="hero"> 
+            <div class="container"> 
                 <form action="https://formspree.io/f/moqyyrpr" method="POST">
                     <h1>Sign Up</h1>
                     <div class="form-group">
